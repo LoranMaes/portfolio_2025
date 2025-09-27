@@ -4,6 +4,7 @@ import './globals.css';
 import ReactLenis from 'lenis/react';
 import ClientWrapper from './ClientWrapper';
 import Header from '@/components/Header/Index';
+import CustomCursor from '@/components/CustomCursor/Index';
 
 const inter = Inter({
 	variable: '--font-inter',
@@ -24,6 +25,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${inter.variable} antialiased`}>
 				<ReactLenis root />
+				<CustomCursor />
 				<ClientWrapper>
 					<Header />
 					{children}
