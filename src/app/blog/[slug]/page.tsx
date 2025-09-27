@@ -1,9 +1,9 @@
 'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import BlogPostClient from './BlogPostClient';
 
 export default function BlogPost() {
 	useGSAP(() => {
@@ -11,11 +11,13 @@ export default function BlogPost() {
 		tl.fromTo('main', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 1 });
 		return () => tl.kill();
 	}, []);
+
 	return (
 		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
 			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 				<Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
 				<h2 className="font-bold text-2xl">Blog Post Title</h2>
+				<BlogPostClient />
 			</main>
 			<footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
 				<a

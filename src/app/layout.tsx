@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import ReactLenis from 'lenis/react';
 import ClientWrapper from './ClientWrapper';
-import Header from './components/Header';
+import Header from '@/components/Header/Index';
 
 const inter = Inter({
 	variable: '--font-inter',

@@ -22,6 +22,11 @@ export default function Header() {
 							Web Developer Page
 						</Link>
 					</li>
+					<li>
+						<Link href={'/blog'} className="text-sm sm:text-base underline underline-offset-4">
+							Blog Page
+						</Link>
+					</li>
 				</ul>
 			</nav>
 		</header>

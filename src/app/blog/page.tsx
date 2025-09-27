@@ -16,6 +16,16 @@ export default function Blog() {
 			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 				<Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
 				<h2 className="font-bold text-2xl">Blog Posts</h2>
+
+				<ul>
+					{['post-1', 'post-2', 'post-3'].map((slug) => (
+						<li key={slug} className="mb-2">
+							<a href={`/blog/${slug}`} className="text-blue-600 hover:underline dark:text-blue-400">
+								{slug.replace('-', ' ').toUpperCase()}
+							</a>
+						</li>
+					))}
+				</ul>
 			</main>
 			<footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
 				<a

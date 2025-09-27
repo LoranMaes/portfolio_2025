@@ -16,11 +16,6 @@ export default function BlogLayout({
 }>) {
 	return (
 		<section className="blog-layout">
-			<header className="blog-header">
-				<h1 className="text-3xl font-bold">Blog</h1>
-				<p className="text-muted">Insights on coding, design & content creation</p>
-			</header>
-
 			<main className="blog-content">{children}</main>
 		</section>
 	);
