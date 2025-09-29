@@ -42,7 +42,7 @@ export default function Header() {
 	return (
 		<header className="relative flex">
 			<div
-				className="relative z-20 flex items-center gap-2 p-5 justify-between w-full bg-background border border-b border-gray-100"
+				className="relative z-20 flex items-center gap-2 p-5 justify-between w-full bg-background border-b border-b-foreground/10"
 				ref={upperWrapper}
 			>
 				<TransitionLink href="/" className="text-3xl font-bold tracking-tighter">

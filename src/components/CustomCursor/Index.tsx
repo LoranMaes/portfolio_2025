@@ -59,7 +59,7 @@ export default function CustomCursor() {
 	return (
 		<div
 			ref={cursor}
-			className="bg-background fixed top-0 transition-[width,_height] duration-100 ease-linear left-0 z-[999] rounded-full mix-blend-difference pointer-events-none cursor-none"
+			className="bg-background dark:bg-foreground fixed top-0 transition-[width,_height] duration-100 ease-linear left-0 z-[999] rounded-full mix-blend-difference pointer-events-none cursor-none"
 			style={{ width: size, height: size, opacity: opacity }}
 		></div>
 	);

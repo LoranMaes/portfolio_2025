@@ -23,7 +23,7 @@ export const TransitionLink: React.FC<TransitionLinkProps> = ({ children, href, 
 
 		close();
 
-		const overlay = document.getElementById('route-transition');
+		const overlay = document.querySelector('#route-transition');
 		if (!overlay) {
 			// Fallback: just navigate if overlay isn't mounted
 			router.push(href);
