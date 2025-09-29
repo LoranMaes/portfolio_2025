@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import ReactLenis from 'lenis/react';
-import ClientWrapper from './ClientWrapper';
 import Header from '@/components/Header/Index';
 import CustomCursor from '@/components/CustomCursor/Index';
+import { unstable_ViewTransition as ViewTransitions } from 'react';
+import TransitionOverlay from '@/components/TransitionOverlay/Index';
+import { NavProvider } from '@/Contexts/NavContext';
 
 const inter = Inter({
 	variable: '--font-inter',
@@ -24,12 +26,13 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.variable} antialiased`}>
-				<ClientWrapper>
+				<NavProvider>
 					<Header />
 					{children}
-				</ClientWrapper>
-				<ReactLenis root />
-				<CustomCursor />
+					<ReactLenis root />
+					<CustomCursor />
+					<TransitionOverlay />
+				</NavProvider>
 			</body>
 		</html>
 	);

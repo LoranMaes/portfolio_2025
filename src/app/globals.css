@@ -37,6 +37,9 @@ body,
 	nav ul li a.navigation-link {
 		@apply inline-block text-foreground no-underline font-medium text-4xl tracking-tight;
 	}
+	body.is-transitioning {
+		@apply pointer-events-none select-none touch-none;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
