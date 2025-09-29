@@ -24,12 +24,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.variable} antialiased`}>
-				<ReactLenis root />
-				<CustomCursor />
 				<ClientWrapper>
 					<Header />
 					{children}
 				</ClientWrapper>
+				<ReactLenis root />
+				<CustomCursor />
 			</body>
 		</html>
 	);

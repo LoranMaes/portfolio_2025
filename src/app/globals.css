@@ -18,6 +18,27 @@ body,
 	--font-mono: var(--font-inter);
 }
 
+@layer utilities {
+	html.noScroll,
+	body.noScroll {
+		@apply overflow-hidden max-h-screen h-screen;
+	}
+	button.hamburger {
+		@apply size-[18px] flex flex-col gap-[2px] place-content-center items-center;
+	}
+	button.hamburger div.wrapper {
+		flex: 0 0 auto;
+		@apply flex place-content-center gap-[9px] items-center h-min w-full transition-all duration-250;
+	}
+	button.hamburger span {
+		flex: 0 0 auto;
+		@apply bg-foreground aspect-square w-[5px] transition-all duration-150;
+	}
+	nav ul li a.navigation-link {
+		@apply inline-block text-foreground no-underline font-medium text-4xl tracking-tight;
+	}
+}
+
 @media (prefers-color-scheme: dark) {
 	:root {
 		--background: #171717;
