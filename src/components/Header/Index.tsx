@@ -1,5 +1,5 @@
 'use client';
-import { title } from '@/assets/database';
+import { header_links, title } from '@/assets/database';
 import Link from 'next/link';
 import Hamburger from '../Hamburger/Index';
 import { useEffect, useRef, useState } from 'react';
@@ -89,26 +89,13 @@ export default function Header() {
 				}px] bg-background absolute w-screen items-center justify-center gap-10 p-5 transition-all duration-1000 ease-initial`}
 			>
 				<ul className="flex flex-col grow items-center justify-center gap-[30px] h-min">
-					<li className="hover:opacity-50 transition-opacity duration-150">
-						<Link href={'/about'} className="navigation-link">
-							About Page
-						</Link>
-					</li>
-					<li className="hover:opacity-50 transition-opacity duration-150">
-						<Link href={'/contact'} className="navigation-link">
-							Contact Page
-						</Link>
-					</li>
-					<li className="hover:opacity-50 transition-opacity duration-150">
-						<Link href={'/web-developer'} className="navigation-link">
-							Web Developer
-						</Link>
-					</li>
-					<li className="hover:opacity-50 transition-opacity duration-150">
-						<Link href={'/blog'} className="navigation-link">
-							Blog Page
-						</Link>
-					</li>
+					{header_links.map((link) => (
+						<li key={link.href} className="hover:opacity-50 transition-opacity duration-150">
+							<Link href={link.href} className="navigation-link">
+								{link.name}
+							</Link>
+						</li>
+					))}
 				</ul>
 			</nav>
 		</header>
