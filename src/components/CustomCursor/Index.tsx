@@ -1,66 +1,90 @@
 'use client';
+import { useScreen } from '@/Contexts/ScreenContext';
 import gsap from 'gsap';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
-	const mouse = useRef({ x: 0, y: 0 });
-	const cursor = useRef<HTMLDivElement>(null);
-	const [size, setSize] = useState(20);
-	const [opacity, setOpacity] = useState(0);
+    const { isMobile } = useScreen();
 
-	const manageMouse = (event: MouseEvent) => {
-		if (!opacity) setOpacity(1);
+    const [size, setSize] = useState(20);
+    const [opacity, setOpacity] = useState(0);
+    const [cursorText, setCursorText] = useState('');
 
-		const { clientX, clientY } = event;
-		mouse.current = {
-			x: clientX,
-			y: clientY,
-		};
+    const mouse = useRef({ x: 0, y: 0 });
+    const cursor = useRef<HTMLDivElement>(null);
 
-		moveCircle(mouse.current.x, mouse.current.y);
-	};
+    const manageMouse = (event: MouseEvent) => {
+        if (!opacity) setOpacity(1);
 
-	const moveCircle = (x: number, y: number) => {
-		// If the cursor is above a clickable element, scale it up
-		let cursorShouldScale = false;
-		const elements = document.elementsFromPoint(x, y);
-		for (const el of elements) {
-			if (el instanceof HTMLElement) {
-				const style = window.getComputedStyle(el);
-				if (
-					style.cursor === 'pointer' ||
-					el.tagName === 'A' ||
-					el.tagName === 'BUTTON' ||
-					el.getAttribute('role') === 'button'
-				) {
-					cursorShouldScale = true;
-					break;
-				}
-			}
-		}
+        const { clientX, clientY } = event;
+        mouse.current = {
+            x: clientX,
+            y: clientY,
+        };
 
-		cursorShouldScale ? setSize(70) : setSize(20);
+        moveCircle(mouse.current.x, mouse.current.y);
+    };
 
-		gsap.set(cursor.current, {
-			x,
-			y,
-			xPercent: -50,
-			yPercent: -50,
-		});
-	};
+    const moveCircle = (x: number, y: number) => {
+        // If the cursor is above a clickable element, scale it up
+        let cursorShouldScale = false;
+        let hasCopyAttribute = false;
+        const elements = document.elementsFromPoint(x, y);
+        for (const el of elements) {
+            if (el instanceof HTMLElement) {
+                // Check for data-copy-clipboard attribute
+                if (el.hasAttribute('data-copy-clipboard')) {
+                    hasCopyAttribute = true;
+                    cursorShouldScale = true;
+                    break;
+                }
 
-	useEffect(() => {
-		window.addEventListener('mousemove', manageMouse);
-		return () => {
-			window.removeEventListener('mousemove', manageMouse);
-		};
-	}, []);
+                const style = window.getComputedStyle(el);
+                if (style.cursor === 'pointer' || el.tagName === 'A' || el.tagName === 'BUTTON' || el.getAttribute('role') === 'button') {
+                    cursorShouldScale = true;
+                    break;
+                }
+            }
+        }
 
-	return (
-		<div
-			ref={cursor}
-			className="bg-background dark:bg-foreground fixed top-0 transition-[width,_height] duration-100 ease-linear left-0 z-[999] rounded-full mix-blend-difference pointer-events-none cursor-none"
-			style={{ width: size, height: size, opacity: opacity }}
-		></div>
-	);
+        if (hasCopyAttribute) {
+            setSize(70);
+            setCursorText('Copy');
+        } else {
+            cursorShouldScale ? setSize(70) : setSize(20);
+            setCursorText('');
+        }
+
+        gsap.set(cursor.current, {
+            x,
+            y,
+            xPercent: -50,
+            yPercent: -50,
+        });
+    };
+
+    useEffect(() => {
+        if (isMobile) return;
+
+        window.addEventListener('mousemove', manageMouse);
+        return () => {
+            window.removeEventListener('mousemove', manageMouse);
+        };
+    }, [isMobile]);
+
+    if (isMobile) return null;
+
+    return (
+        <div
+            ref={cursor}
+            className={`md:pointer-events-none md:fixed md:top-0 md:left-0 md:z-[999] md:flex md:cursor-none md:items-center md:justify-center md:rounded-full md:bg-background md:transition-[height,_width,_padding] md:duration-100 md:ease-linear md:dark:bg-foreground ${cursorText ? 'md:px-8 md:py-4' : 'md:mix-blend-difference'}`}
+            style={{ width: cursorText ? 'auto' : size, height: cursorText ? 'auto' : size, opacity: opacity }}
+        >
+            <span
+                className={`body-medium leading-none font-medium text-foreground transition-opacity duration-100 dark:text-background ${cursorText ? 'opacity-100' : 'opacity-0'}`}
+            >
+                {cursorText || 'Copy'}
+            </span>
+        </div>
+    );
 }

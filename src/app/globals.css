@@ -1,56 +1,137 @@
 @import 'tailwindcss';
 
 :root {
-	--background: #fefefe;
-	--foreground: #171717;
+    --background: #fefefe;
+    --color-button: #f5f5f5;
+    --color-button-hover: #000000;
+    --foreground: #171717;
 }
 
 html,
 body,
 * {
-	@apply cursor-none;
+    @apply md:cursor-none;
 }
 
 @theme inline {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--font-sans: var(--font-inter);
-	--font-mono: var(--font-inter);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-button: var(--color-button);
+    --color-button-hover: var(--color-button-hover);
+    --font-sans: var(--font-inter);
+    --font-mono: var(--font-inter);
 }
 
 @layer utilities {
-	html.noScroll,
-	body.noScroll {
-		@apply overflow-hidden max-h-screen h-screen;
-	}
-	button.hamburger {
-		@apply size-[18px] flex flex-col gap-[2px] place-content-center items-center;
-	}
-	button.hamburger div.wrapper {
-		flex: 0 0 auto;
-		@apply flex place-content-center gap-[9px] items-center h-min w-full transition-all duration-250;
-	}
-	button.hamburger span {
-		flex: 0 0 auto;
-		@apply bg-foreground aspect-square w-[5px] transition-all duration-150;
-	}
-	nav ul li a.navigation-link {
-		@apply inline-block text-foreground no-underline font-medium text-4xl tracking-tight;
-	}
-	body.is-transitioning {
-		@apply pointer-events-none select-none touch-none;
-	}
+    html.noScroll,
+    body.noScroll {
+        @apply h-screen max-h-screen overflow-hidden;
+    }
+    button.hamburger {
+        @apply flex size-[18px] flex-col place-content-center items-center gap-[2px];
+    }
+    button.hamburger div.wrapper {
+        flex: 0 0 auto;
+        @apply flex h-min w-full place-content-center items-center gap-[9px] transition-all duration-250;
+    }
+    button.hamburger span {
+        flex: 0 0 auto;
+        @apply aspect-square w-[5px] bg-foreground transition-all duration-150;
+    }
+    nav ul li a.navigation-link {
+        @apply inline-block text-4xl font-medium tracking-tight text-foreground no-underline;
+    }
+    body.is-transitioning {
+        @apply pointer-events-none touch-none select-none;
+    }
+
+    /* Typography Styles */
+    h1 {
+        @apply text-[4.75rem] leading-[1em] font-semibold tracking-[-0.09em] md:text-[7.25rem] lg:text-[10.875rem];
+    }
+
+    h2 {
+        @apply text-[2.125rem] leading-[0.9em] font-semibold tracking-[-0.05em] md:text-[5.5rem] md:tracking-[-0.06em] lg:text-[6.875rem];
+    }
+
+    h3 {
+        @apply text-[2.125rem] leading-[1em] font-bold tracking-[-0.05em] italic md:text-[5rem] md:tracking-[-0.08em] lg:text-[5.625rem];
+    }
+
+    h4 {
+        @apply text-[2rem] leading-[1.2em] font-medium tracking-[-0.05em] md:text-[2.375rem] lg:text-[3rem];
+    }
+
+    h5 {
+        @apply text-[1.1875rem] leading-[1.2em] font-medium tracking-[-0.03em] md:text-[1.5rem] lg:text-[1.875rem];
+    }
+
+    h6 {
+        @apply text-[1.125rem] leading-[1.2em] font-medium tracking-[0em];
+    }
+
+    .body-extra-large {
+        @apply text-[1.75rem] leading-[1.1em] font-medium tracking-[-0.06em] md:text-[2.5rem] lg:text-[3.125rem];
+    }
+
+    .body-large {
+        @apply text-[1.75rem] leading-[1.1em] font-medium tracking-[-0.06em] md:text-[2rem] lg:text-[2.5rem];
+    }
+
+    .body-medium {
+        @apply text-[1rem] leading-[1.2em] font-medium tracking-[-0.04em] lg:text-[1.25rem];
+    }
+
+    .body-small {
+        @apply text-[0.875rem] leading-[1.6em] font-normal tracking-[0em] lg:text-[1rem];
+    }
+
+    .button-large {
+        @apply text-[1.625rem] leading-[1.3em] font-medium tracking-[-0.06em];
+    }
+
+    .button-normal {
+        @apply text-[1.25rem] leading-[1.2em] font-medium tracking-[0em];
+    }
+
+    .button-small {
+        @apply text-[1rem] leading-[1.2em] font-medium tracking-[-0.04em];
+    }
+
+    .menu {
+        @apply text-[2.375rem] leading-[1.1em] font-medium tracking-[-0.06em] md:text-[1.125rem];
+    }
+
+    .quote {
+        @apply text-[2rem] leading-[1.1em] font-medium tracking-[-0.07em] md:text-[2.5rem] lg:text-[3.125rem];
+    }
+
+    button {
+        @apply flex items-center justify-center;
+    }
+
+    button.normal {
+        @apply px-9 py-5;
+    }
+
+    button.small {
+        @apply px-6 py-4;
+    }
+
+    button.primary {
+        @apply bg-button text-button-hover transition-colors duration-150 ease-linear hover:bg-button-hover hover:text-button;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
-		--background: #171717;
-		--foreground: #fefefe;
-	}
+    :root {
+        --background: #171717;
+        --foreground: #fefefe;
+    }
 }
 
 body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }

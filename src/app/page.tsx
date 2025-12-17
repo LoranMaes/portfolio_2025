@@ -1,78 +1,114 @@
 'use client';
+import Footer from '@/components/Footer/Index';
+import SectionShell from '@/components/SectionShell/Index';
+import WorkItem from '@/components/WorkItem';
+import { useNav } from '@/Contexts/NavContext';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Image from 'next/image';
 
-export default function Home() {
-	useGSAP(() => {
-		const tl = gsap.timeline();
-		tl.fromTo('main', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 1 });
-		return () => tl.kill();
-	}, []);
-	return (
-		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-				<Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
-				<ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-					<li className="mb-2 tracking-[-.01em]">
-						Get started by editing{' '}
-						<code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-							app/page.tsx
-						</code>
-						.
-					</li>
-					<li className="tracking-[-.01em]">Save and see your changes instantly.</li>
-				</ol>
+const work = [
+    {
+        title: 'Stone Mind',
+        description: 'A mental health app to help users manage stress and anxiety through guided exercises and resources.',
+        image: '/assets/work/stone-mind.jpg',
+        href: '/work/stone-mind',
+    },
+    {
+        title: 'Violet Orbit',
+        description: 'An e-commerce platform specializing in sustainable fashion and eco-friendly products.',
+        image: '/assets/work/violet-orbit.jpg',
+        href: '/work/violet-orbit',
+    },
+    {
+        title: 'Visual Screen Models',
+        description: 'A portfolio website for a modeling agency showcasing their talent and services.',
+        image: '/assets/work/visual-screen-models.jpg',
+        href: '/work/visual-screen-models',
+    },
+];
 
-				<div className="flex gap-4 items-center flex-col sm:flex-row">
-					<a
-						className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image className="dark:invert" src="/vercel.svg" alt="Vercel logomark" width={20} height={20} />
-						Deploy now
-					</a>
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Read our docs
-					</a>
-				</div>
-			</main>
-			<footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-					Learn
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-					Examples
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-					Go to nextjs.org →
-				</a>
-			</footer>
-		</div>
-	);
+export default function Home() {
+    const { isOpen } = useNav();
+
+    useGSAP(() => {
+        const tl = gsap.timeline();
+        tl.fromTo('main', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 1 });
+        return () => tl.kill();
+    }, []);
+    return (
+        <>
+            <SectionShell>
+                <div className="flex flex-col gap-8 py-8">
+                    <div className="flex flex-col gap-6">
+                        <Image
+                            src="/assets/home-loran.webp"
+                            width={96}
+                            height={96}
+                            className="aspect-square size-28 rounded-full object-cover object-[0_35%]"
+                            alt="Picture of Loran Maes sitting at a desk"
+                        />
+                        <div className="flex flex-col">
+                            <h2>Loran</h2>
+                            <h1>Maes</h1>
+                        </div>
+                    </div>
+
+                    <a href="mailto:info@loranmaes.be" className="button-large group relative w-fit" data-copy-clipboard={isOpen ? undefined : true}>
+                        info@loranmaes.be
+                        <span className="body-medium pointer-events-none absolute inset-0 flex items-center justify-center bg-blue-400 text-foreground opacity-0 transition-opacity duration-100 ease-linear group-hover:opacity-100">
+                            <span className="scale-95 transition-transform duration-100 ease-linear group-hover:scale-100">Copy to clipboard</span>
+                        </span>
+                    </a>
+
+                    <p className="body-large text-end">
+                        Hallo! Ik ben een web developer en content creator uit Gent.
+                        <br />
+                        <br />- Let's work!
+                    </p>
+                </div>
+            </SectionShell>
+            <SectionShell>
+                <div className="flex flex-col gap-8">
+                    <div className="flex w-full items-center justify-between gap-4">
+                        <h5>work.</h5>
+                        <button className="small primary">
+                            <span className="button-small">Show More</span>
+                        </button>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        {work.map((item) => (
+                            <WorkItem key={item.title} title={item.title} description={item.description} image={item.image} href={item.href} />
+                        ))}
+                    </div>
+                </div>
+            </SectionShell>
+            <SectionShell>
+                <div className="flex flex-col gap-10">
+                    <div className="flex w-full items-center justify-between gap-4">
+                        <h5>about.</h5>
+                        <button className="small primary">
+                            <span className="button-small">Show More</span>
+                        </button>
+                    </div>
+                    <p className="body-extra-large text-justify">
+                        I collaborate with businesses of all sizes worldwide, using the latest technologies. My designs have also earned multiple
+                        rewards.
+                    </p>
+                    <Image
+                        src="/assets/about-loran-full.jpg"
+                        width={500}
+                        height={500}
+                        alt="Picture of Loran Maes in front of a building"
+                        className="aspect-[5/3] w-full object-cover"
+                    />
+                    <p className="body-medium text-justify">
+                        I'm dedicated to crafting beautiful and highly functional designs that seamlessly align with my clients' unqiue needs and
+                        long-term goals.
+                    </p>
+                </div>
+            </SectionShell>
+            <Footer />
+        </>
+    );
 }
