@@ -50,7 +50,7 @@ export default function Header() {
 
             <nav
                 ref={navRef}
-                className={`${isOpen ? 'h-screen' : 'h-0'} z-10 grid overflow-hidden mt-[${
+                className={`${isOpen ? 'h-screen' : 'h-0'} z-[19] grid overflow-hidden mt-[${
                     upperWrapper.current?.clientHeight
                 }px] absolute w-screen items-center justify-center gap-10 bg-background p-5 transition-all duration-1000 ease-initial`}
             >
