@@ -7,7 +7,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 
 const work = [
     {
@@ -84,7 +84,7 @@ export default function Home() {
     }, []);
 
     return (
-        <>
+        <Fragment>
             {/* Footer fixed behind everything (this is what makes it NOT feel like flex-col) */}
             <div ref={footerFixedRef} className="fixed inset-0 z-0">
                 <Footer />
@@ -93,8 +93,8 @@ export default function Home() {
             {/* Foreground content that scrolls away to reveal the footer */}
             <main className="relative z-10 bg-background">
                 <SectionShell>
-                    <div className="flex flex-col gap-8 py-8">
-                        <div className="flex flex-col gap-6">
+                    <div className="flex w-full flex-col gap-8 py-8 md:h-[75vh] md:justify-between">
+                        <div className="flex flex-col gap-6 md:w-full md:flex-row-reverse md:justify-between">
                             <Image
                                 src="/assets/home-loran.webp"
                                 width={96}
@@ -102,44 +102,53 @@ export default function Home() {
                                 className="aspect-square size-28 rounded-full object-cover object-[0_35%]"
                                 alt="Picture of Loran Maes sitting at a desk"
                             />
-                            <div className="flex flex-col">
+                            <div className="flex flex-col uppercase">
                                 <h2>Loran</h2>
                                 <h1>Maes</h1>
                             </div>
                         </div>
 
-                        <a
-                            href="mailto:info@loranmaes.be"
-                            className="button-large group relative w-fit"
-                            data-copy-clipboard={isOpen ? undefined : true}
-                        >
-                            info@loranmaes.be
-                            <span className="body-medium pointer-events-none absolute inset-0 flex items-center justify-center bg-blue-400 text-foreground opacity-0 transition-opacity duration-100 ease-linear group-hover:opacity-100">
-                                <span className="scale-95 transition-transform duration-100 ease-linear group-hover:scale-100">
-                                    Copy to clipboard
+                        <div className="flex w-full flex-col gap-8 md:flex-row md:justify-between">
+                            <a
+                                href="mailto:info@loranmaes.be"
+                                className="button-large group relative h-fit w-fit"
+                                data-copy-clipboard={isOpen ? undefined : true}
+                            >
+                                info@loranmaes.be
+                                <span className="body-medium pointer-events-none absolute inset-0 flex items-center justify-center bg-blue-400 text-foreground opacity-0 transition-opacity duration-100 ease-linear group-hover:opacity-100">
+                                    <span className="scale-95 transition-transform duration-100 ease-linear group-hover:scale-100">
+                                        Copy to clipboard
+                                    </span>
                                 </span>
-                            </span>
-                        </a>
+                            </a>
 
-                        <p className="body-large text-end">
-                            Hallo! Ik ben een web developer en content creator uit Gent.
-                            <br />
-                            <br />- Let's work!
-                        </p>
+                            <p className="body-large text-end md:max-w-[17ch]">
+                                Hallo! Ik ben een web developer en content creator uit Gent.
+                                <br />
+                                <br />- Let's work!
+                            </p>
+                        </div>
                     </div>
                 </SectionShell>
 
                 <SectionShell>
-                    <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-8 md:w-full">
                         <div className="flex w-full items-center justify-between gap-4">
                             <h5>work.</h5>
                             <button className="small primary">
                                 <span className="button-small">Show More</span>
                             </button>
                         </div>
-                        <div className="flex flex-col gap-4">
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
                             {work.map((item) => (
-                                <WorkItem key={item.title} title={item.title} description={item.description} image={item.image} href={item.href} />
+                                <WorkItem
+                                    key={item.title}
+                                    title={item.title}
+                                    description={item.description}
+                                    image={item.image}
+                                    href={item.href}
+                                    className="col-span-1"
+                                />
                             ))}
                         </div>
                     </div>
@@ -159,23 +168,25 @@ export default function Home() {
                                 I collaborate with businesses of all sizes worldwide, using the latest technologies. My designs have also earned
                                 multiple rewards.
                             </p>
-                            <Image
-                                src="/assets/about-loran-full.jpg"
-                                width={500}
-                                height={500}
-                                alt="Picture of Loran Maes in front of a building"
-                                className="aspect-[5/3] w-full object-cover"
-                            />
-                            <p className="body-medium text-justify">
-                                I'm dedicated to crafting beautiful and highly functional designs that seamlessly align with my clients' unqiue needs
-                                and long-term goals.
-                            </p>
+                            <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+                                <Image
+                                    src="/assets/about-loran-full.jpg"
+                                    width={500}
+                                    height={500}
+                                    alt="Picture of Loran Maes in front of a building"
+                                    className="aspect-[5/3] w-full object-cover md:w-full"
+                                />
+                                <p className="body-medium text-justify md:w-full">
+                                    I'm dedicated to crafting beautiful and highly functional designs that seamlessly align with my clients' unqiue
+                                    needs and long-term goals.
+                                </p>
+                            </div>
                         </div>
                     </SectionShell>
                 </div>
             </main>
             {/* This creates the reveal: you scroll “into” the footer area (footer is fixed behind) */}
             <div ref={endSentinelRef} className="pointer-events-none h-screen" />
-        </>
+        </Fragment>
     );
 }

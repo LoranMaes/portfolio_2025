@@ -1,10 +1,22 @@
 import Link from 'next/link';
 
-export default function WorkItem({ title, description, image, href }: { title: string; description: string; image: string; href: string }) {
+export default function WorkItem({
+    title,
+    description,
+    image,
+    href,
+    className,
+}: {
+    title: string;
+    description: string;
+    image: string;
+    href: string;
+    className?: string;
+}) {
     return (
         <Link
             href={href}
-            className={`group relative flex aspect-square w-full items-end bg-cover bg-center p-8`}
+            className={`group relative flex aspect-square w-full items-end bg-cover bg-center p-8 ` + (className ?? '')}
             style={{ backgroundImage: `url(${image})` }}
         >
             <h4 className="relative z-20 h-fit w-fit text-foreground">{title}</h4>
