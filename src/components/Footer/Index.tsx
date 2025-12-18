@@ -22,7 +22,9 @@ export default function Footer() {
                 </ul>
             </nav>
             <div className="flex flex-col gap-8">
-                <h4 className="text-[3rem]">Curious about what we can create together? Let's bring something extraordinary to life!</h4>
+                <h4 className="bg-[linear-gradient(to_right,white_37%,#383838_95%)] bg-clip-text text-[3rem] text-transparent">
+                    Curious about what we can create together? Let's bring something extraordinary to life!
+                </h4>
 
                 <div className="flex flex-col gap-8 md:flex-row-reverse md:justify-end">
                     <div className="flex items-center gap-4">
@@ -32,7 +34,7 @@ export default function Footer() {
                         </span>
                         <p className="body-small">Available For Work</p>
                     </div>
-                    <button className="small primary md:w-fit">
+                    <button className="normal primary md:w-fit">
                         <span className="button-small">Get in Touch</span>
                     </button>
                 </div>

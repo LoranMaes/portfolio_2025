@@ -99,7 +99,14 @@ export default function Home() {
                                 src="/assets/home-loran.webp"
                                 width={96}
                                 height={96}
-                                className="aspect-square size-28 rounded-full object-cover object-[0_35%]"
+                                className="aspect-square size-28 rounded-full object-cover object-[0_35%] lg:hidden"
+                                alt="Picture of Loran Maes sitting at a desk"
+                            />
+                            <Image
+                                src="/assets/home-loran.webp"
+                                width={1024}
+                                height={1024}
+                                className="hidden aspect-square size-28 rounded-full object-cover object-[0_35%] lg:block lg:size-48"
                                 alt="Picture of Loran Maes sitting at a desk"
                             />
                             <div className="flex flex-col uppercase">
@@ -164,11 +171,13 @@ export default function Home() {
                                     <span className="button-small">Show More</span>
                                 </button>
                             </div>
-                            <p className="body-extra-large text-justify">
+
+                            <p className="body-extra-large w-full text-justify lg:w-2/3">
                                 I collaborate with businesses of all sizes worldwide, using the latest technologies. My designs have also earned
                                 multiple rewards.
                             </p>
-                            <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+
+                            <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between lg:ml-auto lg:w-11/12">
                                 <Image
                                     src="/assets/about-loran-full.jpg"
                                     width={500}

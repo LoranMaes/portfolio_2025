@@ -40,7 +40,7 @@ export default function Header() {
     );
 
     return (
-        <header className="relative flex max-w-[1400px]">
+        <header className="relative mx-auto flex max-w-[1600px]">
             <div className="relative z-20 flex w-full items-center justify-between gap-2 bg-background p-5" ref={upperWrapper}>
                 <TransitionLink href="/" className="text-3xl font-bold tracking-tighter">
                     <p>{title}</p>
