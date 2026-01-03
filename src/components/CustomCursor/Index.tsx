@@ -13,6 +13,8 @@ export default function CustomCursor() {
     const mouse = useRef({ x: 0, y: 0 });
     const cursor = useRef<HTMLDivElement>(null);
 
+    const hoverableElements = ['a', 'button', '[role="button"]', '.clickable', 'summary'];
+
     const manageMouse = (event: MouseEvent) => {
         if (!opacity) setOpacity(1);
 
@@ -40,7 +42,7 @@ export default function CustomCursor() {
                 }
 
                 const style = window.getComputedStyle(el);
-                if (style.cursor === 'pointer' || el.tagName === 'A' || el.tagName === 'BUTTON' || el.getAttribute('role') === 'button') {
+                if (style.cursor === 'pointer' || hoverableElements.includes(el.tagName.toLowerCase()) || el.getAttribute('role') === 'button') {
                     cursorShouldScale = true;
                     break;
                 }
