@@ -1,41 +1,24 @@
-import Image from 'next/image';
+import SectionShell from '@/components/SectionShell/Index';
+import Link from 'next/link';
 
 export default function NotFound() {
     return (
-        <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-            <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-                <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
-                <h2 className="text-2xl font-bold">Not Found</h2>
-            </main>
-            <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
-                <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-                    Learn
-                </a>
-                <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-                    Examples
-                </a>
-                <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-                    Go to nextjs.org →
-                </a>
-            </footer>
-        </div>
+        <main className="flex grow">
+            <SectionShell>
+                <div className="flex w-full flex-col gap-12">
+                    <h1 className="flex flex-col uppercase">
+                        <span>Page</span>
+                        <span>Not</span>
+                        <span>Found</span>
+                    </h1>
+                    <div className="flex w-full items-center justify-between gap-8">
+                        <Link href="/" className="button small primary">
+                            <span className="button-normal">Back Home</span>
+                        </Link>
+                        <h5>404</h5>
+                    </div>
+                </div>
+            </SectionShell>
+        </main>
     );
 }

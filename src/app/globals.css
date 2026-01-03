@@ -106,19 +106,23 @@ body,
         @apply text-[2rem] leading-[1.1em] font-medium tracking-[-0.07em] md:text-[2.5rem] lg:text-[3.125rem];
     }
 
-    button {
+    button,
+    a.button {
         @apply flex items-center justify-center;
     }
 
-    button.normal {
+    button.normal,
+    a.button.normal {
         @apply px-9 py-5;
     }
 
-    button.small {
+    button.small,
+    a.button.small {
         @apply px-6 py-4;
     }
 
-    button.primary {
+    button.primary,
+    a.button.primary {
         @apply bg-button text-button-hover transition-colors duration-150 ease-linear hover:bg-button-hover hover:text-button;
     }
 }
