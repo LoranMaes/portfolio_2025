@@ -5,11 +5,12 @@ import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-interface TransitionLinkProps extends LinkProps {
+type TransitionLinkProps = LinkProps &
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
     children: React.ReactNode;
     href: string;
     className?: string;
-}
+    };
 
 export const TransitionLink: React.FC<TransitionLinkProps> = ({ children, href, className, ...props }) => {
     const router = useRouter();

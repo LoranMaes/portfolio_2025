@@ -3,14 +3,28 @@ import { header_links, title } from '@/assets/database';
 import { useNav } from '@/Contexts/NavContext';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { usePathname } from 'next/navigation';
 import { useRef } from 'react';
 import Hamburger from '../Hamburger/Index';
 import { TransitionLink } from '../TransitionLink/Index';
 
 export default function Header() {
     const { isOpen, toggle } = useNav();
+    const pathname = usePathname();
     const upperWrapper = useRef<HTMLDivElement>(null);
     const navRef = useRef<HTMLElement>(null);
+
+    const normalizePath = (path: string) => {
+        if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1);
+        return path;
+    };
+
+    const isActiveLink = (href: string) => {
+        const current = normalizePath(pathname);
+        const target = normalizePath(href);
+        if (target === '/') return current === '/';
+        return current === target || current.startsWith(`${target}/`);
+    };
 
     useGSAP(
         () => {
@@ -56,9 +70,23 @@ export default function Header() {
             >
                 <ul className="flex h-min grow flex-col items-center justify-center gap-[30px]">
                     {header_links.map((link) => (
-                        <li key={link.href} className="transition-opacity duration-150 hover:opacity-50">
-                            <TransitionLink href={link.href} className="navigation-link">
-                                {link.name}
+                        <li
+                            key={link.href}
+                            className={`transition-opacity duration-150 ${isActiveLink(link.href) ? 'opacity-100' : 'opacity-75 hover:opacity-50'}`}
+                        >
+                            <TransitionLink
+                                href={link.href}
+                                aria-current={isActiveLink(link.href) ? 'page' : undefined}
+                                className="navigation-link relative"
+                            >
+                                <span className="flex flex-col items-center gap-2">
+                                    <span>{link.name}</span>
+                                    <span
+                                        className={`h-[2px] w-10 bg-foreground transition-opacity duration-200 ${
+                                            isActiveLink(link.href) ? 'opacity-100' : 'opacity-0'
+                                        }`}
+                                    />
+                                </span>
                             </TransitionLink>
                         </li>
                     ))}

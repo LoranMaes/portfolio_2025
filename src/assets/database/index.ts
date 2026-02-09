@@ -21,6 +21,10 @@ const header_links: HeaderLink[] = [
         href: '/web-developer',
     },
     {
+        name: 'Content Creation',
+        href: '/content-creation',
+    },
+    {
         name: 'Blog',
         href: '/blog',
     },

@@ -14,9 +14,5 @@ export default function BlogLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return (
-        <section className="blog-layout">
-            <main className="blog-content">{children}</main>
-        </section>
-    );
+    return children;
 }

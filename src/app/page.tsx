@@ -1,31 +1,16 @@
 'use client';
 import FooterRevealLayout from '@/components/FooterRevealLayout/Index';
 import SectionShell from '@/components/SectionShell/Index';
+import { TransitionLink } from '@/components/TransitionLink/Index';
 import WorkItem from '@/components/WorkItem';
 import { useNav } from '@/Contexts/NavContext';
+import { featuredHomeProjectSlugs, portfolioProjects, type PortfolioProject } from '@/assets/database/projects';
 import Image from 'next/image';
 import { useRef } from 'react';
 
-const work = [
-    {
-        title: 'Stone Mind',
-        description: 'A mental health app to help users manage stress and anxiety through guided exercises and resources.',
-        image: '/assets/work/stone-mind.jpg',
-        href: '/work/stone-mind',
-    },
-    {
-        title: 'Violet Orbit',
-        description: 'An e-commerce platform specializing in sustainable fashion and eco-friendly products.',
-        image: '/assets/work/violet-orbit.jpg',
-        href: '/work/violet-orbit',
-    },
-    {
-        title: 'Visual Screen Models',
-        description: 'A portfolio website for a modeling agency showcasing their talent and services.',
-        image: '/assets/work/visual-screen-models.jpg',
-        href: '/work/visual-screen-models',
-    },
-];
+const work: PortfolioProject[] = featuredHomeProjectSlugs
+    .map((slug) => portfolioProjects.find((project) => project.slug === slug))
+    .filter((project): project is PortfolioProject => Boolean(project));
 
 export default function Home() {
     const { isOpen } = useNav();
@@ -85,18 +70,19 @@ export default function Home() {
                 <div className="flex flex-col gap-8 md:w-full">
                     <div className="flex w-full items-center justify-between gap-4">
                         <h5>work.</h5>
-                        <button className="small primary">
+                        <TransitionLink href="/work" className="button small primary">
                             <span className="button-small">Show More</span>
-                        </button>
+                        </TransitionLink>
                     </div>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
                         {work.map((item) => (
                             <WorkItem
-                                key={item.title}
+                                key={item.slug}
                                 title={item.title}
-                                description={item.description}
+                                description={item.summary}
                                 image={item.image}
-                                href={item.href}
+                                href={`/work/${item.slug}`}
+                                discipline={item.discipline}
                                 className="col-span-1"
                             />
                         ))}

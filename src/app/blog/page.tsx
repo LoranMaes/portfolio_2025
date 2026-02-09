@@ -1,60 +1,6 @@
-'use client';
+import { blogPosts } from '@/assets/database/blog-posts';
+import BlogIndexClient from './BlogIndexClient';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import Image from 'next/image';
-
-export default function Blog() {
-    useGSAP(() => {
-        const tl = gsap.timeline();
-        tl.fromTo('main', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 1 });
-        return () => tl.kill();
-    }, []);
-    return (
-        <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-            <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-                <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
-                <h2 className="text-2xl font-bold">Blog Posts</h2>
-
-                <ul>
-                    {['post-1', 'post-2', 'post-3'].map((slug) => (
-                        <li key={slug} className="mb-2">
-                            <a href={`/blog/${slug}`} className="text-blue-600 hover:underline dark:text-blue-400">
-                                {slug.replace('-', ' ').toUpperCase()}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </main>
-            <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
-                <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-                    Learn
-                </a>
-                <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-                    Examples
-                </a>
-                <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-                    Go to nextjs.org →
-                </a>
-            </footer>
-        </div>
-    );
+export default function BlogPage() {
+    return <BlogIndexClient posts={blogPosts} />;
 }
